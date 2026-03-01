@@ -34,7 +34,9 @@ export default function Navbar({ onNavClick }: NavbarProps) {
 
         // If it's a home link or just a hash, scroll to top
         if (href === '#' || href === '') {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 10);
         }
     };
 

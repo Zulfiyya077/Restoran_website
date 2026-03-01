@@ -7,16 +7,20 @@ import Menu from "@/components/Menu";
 import Reservation from "@/components/Reservation";
 import Logo from "@/components/Logo";
 import { Instagram, Facebook, Globe, MapPin, Phone as PhoneIcon, Mail, ExternalLink, Play, Image as ImageIcon } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useTransition } from 'react';
 
 export default function Home() {
   const [showAboutDetail, setShowAboutDetail] = useState(false);
   const [showContactDetail, setShowContactDetail] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isPending, startTransition] = useTransition();
 
   // Scroll to top when view changes
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const timer = setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }, 20);
+    return () => clearTimeout(timer);
   }, [showAboutDetail, showContactDetail]);
 
   // Simulate initial loading for skeletons
@@ -27,20 +31,26 @@ export default function Home() {
 
   const resetViews = () => {
     setIsLoading(true);
-    setShowAboutDetail(false);
-    setShowContactDetail(false);
+    startTransition(() => {
+      setShowAboutDetail(false);
+      setShowContactDetail(false);
+    });
     setTimeout(() => setIsLoading(false), 800);
   };
 
   const handleShowAbout = () => {
     setIsLoading(true);
-    setShowAboutDetail(true);
+    startTransition(() => {
+      setShowAboutDetail(true);
+    });
     setTimeout(() => setIsLoading(false), 800);
   };
 
   const handleShowContact = () => {
     setIsLoading(true);
-    setShowContactDetail(true);
+    startTransition(() => {
+      setShowContactDetail(true);
+    });
     setTimeout(() => setIsLoading(false), 800);
   };
 
