@@ -28,15 +28,26 @@ export default function Navbar({ onNavClick }: NavbarProps) {
         { name: 'Haqqımızda', href: '#about' },
     ];
 
-    const handleLinkClick = (href: string) => {
+    const handleLinkClick = (e: React.MouseEvent, href: string) => {
+        if (href.startsWith('#')) {
+            e.preventDefault();
+        }
+
         if (onNavClick) onNavClick();
         setIsMobileMenuOpen(false);
 
         // If it's a home link or just a hash, scroll to top
         if (href === '#' || href === '') {
-            setTimeout(() => {
+            requestAnimationFrame(() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, 10);
+            });
+        } else if (href.startsWith('#')) {
+            const element = document.querySelector(href);
+            if (element) {
+                requestAnimationFrame(() => {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                });
+            }
         }
     };
 
@@ -46,7 +57,7 @@ export default function Navbar({ onNavClick }: NavbarProps) {
             isScrolled ? "bg-quzetti-green/90 backdrop-blur-xl border-b border-quzetti-gold/10 py-2 shadow-2xl" : "bg-transparent"
         )}>
             <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-                <div onClick={() => handleLinkClick('#')} className="cursor-pointer">
+                <div onClick={(e) => handleLinkClick(e, '#')} className="cursor-pointer">
                     <Logo width={90} height={90} className="hover:scale-105 transition-transform duration-300" />
                 </div>
 
@@ -56,7 +67,7 @@ export default function Navbar({ onNavClick }: NavbarProps) {
                         <a
                             key={link.name}
                             href={link.href}
-                            onClick={() => handleLinkClick(link.href)}
+                            onClick={(e) => handleLinkClick(e, link.href)}
                             className="text-white/70 hover:text-quzetti-gold text-xs font-bold uppercase tracking-[0.3em] transition-all hover:tracking-[0.5em]"
                         >
                             {link.name}
@@ -64,7 +75,7 @@ export default function Navbar({ onNavClick }: NavbarProps) {
                     ))}
                     <a
                         href="#reservation"
-                        onClick={() => handleLinkClick('#reservation')}
+                        onClick={(e) => handleLinkClick(e, '#reservation')}
                         className="px-8 py-3 bg-quzetti-gold text-quzetti-green text-xs font-black uppercase tracking-widest rounded-full hover:bg-quzetti-gold-light transition-all shadow-lg hover:shadow-quzetti-gold/20"
                     >
                         MASA AYIR
@@ -94,7 +105,7 @@ export default function Navbar({ onNavClick }: NavbarProps) {
                                 <a
                                     key={link.name}
                                     href={link.href}
-                                    onClick={() => handleLinkClick(link.href)}
+                                    onClick={(e) => handleLinkClick(e, link.href)}
                                     className="text-white text-lg font-serif font-bold tracking-widest hover:text-quzetti-gold"
                                 >
                                     {link.name}
@@ -102,7 +113,7 @@ export default function Navbar({ onNavClick }: NavbarProps) {
                             ))}
                             <a
                                 href="#reservation"
-                                onClick={() => handleLinkClick('#reservation')}
+                                onClick={(e) => handleLinkClick(e, '#reservation')}
                                 className="mt-4 px-8 py-4 bg-quzetti-gold text-quzetti-green font-bold rounded-xl"
                             >
                                 MASA AYIR

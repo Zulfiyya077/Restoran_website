@@ -57,7 +57,7 @@ export default function Home() {
   return (
     <main className="relative bg-quzetti-green min-h-screen overflow-x-hidden">
       <Navbar onNavClick={resetViews} />
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {!showAboutDetail && !showContactDetail ? (
           <motion.div
             key="main-content"

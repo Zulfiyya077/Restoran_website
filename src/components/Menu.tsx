@@ -123,10 +123,9 @@ export default function Menu() {
 
                 {/* Menu Grid */}
                 <motion.div
-                    layout
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
                 >
-                    <AnimatePresence mode="popLayout">
+                    <AnimatePresence>
                         {itemsToDisplay.map((item, idx) => {
                             const rowIndex = Math.floor(idx / 3);
                             const xOffset = rowIndex % 2 === 0 ? 100 : -100;
@@ -134,16 +133,13 @@ export default function Menu() {
                             return (
                                 <motion.div
                                     key={item.name}
-                                    layout
-                                    initial={{ opacity: 0, x: xOffset, y: 20 }}
-                                    whileInView={{ opacity: 1, x: 0, y: 0 }}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true, margin: "-100px" }}
-                                    exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                                    exit={{ opacity: 0, scale: 0.9 }}
                                     transition={{
-                                        opacity: { duration: 0.5 },
-                                        x: { duration: 0.8, ease: "easeOut" },
-                                        layout: { duration: 0.6, ease: "circOut" },
-                                        delay: (idx % 3) * 0.1
+                                        duration: 0.4,
+                                        delay: (idx % 3) * 0.05
                                     }}
                                     className="glass rounded-[2rem] border border-quzetti-gold/10 hover:border-quzetti-gold/40 transition-all group overflow-hidden flex flex-col h-full shadow-xl"
                                 >

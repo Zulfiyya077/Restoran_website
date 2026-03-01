@@ -33,7 +33,7 @@ function PlexusParticles({ count = 100 }) {
 
         const positions = pointsRef.current.geometry.attributes.position.array as Float32Array;
         const linePositions: number[] = [];
-        const maxDistance = 2.5;
+        const maxDistanceSq = 2.25; // 1.5 * 1.5
 
         for (let i = 0; i < count; i++) {
             positions[i * 3] += velocities[i * 3];
@@ -45,14 +45,14 @@ function PlexusParticles({ count = 100 }) {
             if (Math.abs(positions[i * 3 + 1]) > 5) velocities[i * 3 + 1] *= -1;
             if (Math.abs(positions[i * 3 + 2]) > 5) velocities[i * 3 + 2] *= -1;
 
-            // Lines
+            // Lines - Simplified N^2 loop
             for (let j = i + 1; j < count; j++) {
                 const dx = positions[i * 3] - positions[j * 3];
                 const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
                 const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
-                const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+                const distSq = dx * dx + dy * dy + dz * dz;
 
-                if (dist < maxDistance) {
+                if (distSq < maxDistanceSq) {
                     linePositions.push(positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]);
                     linePositions.push(positions[j * 3], positions[j * 3 + 1], positions[j * 3 + 2]);
                 }
@@ -88,8 +88,8 @@ function PlexusParticles({ count = 100 }) {
 export default function PlexusBackground() {
     return (
         <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-            <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
-                <PlexusParticles count={80} />
+            <Canvas camera={{ position: [0, 0, 5], fov: 75 }} frameloop="always">
+                <PlexusParticles count={45} />
             </Canvas>
         </div>
     );
