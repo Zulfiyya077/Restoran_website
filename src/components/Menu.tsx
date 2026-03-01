@@ -80,30 +80,19 @@ export default function Menu() {
 
             <div className="max-w-7xl mx-auto relative z-10">
                 <div className="text-center mb-16">
-                    <motion.span
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        className="text-quzetti-gold uppercase tracking-[0.5em] text-xs font-bold mb-4 block"
-                    >
+                    <span className="text-quzetti-gold uppercase tracking-[0.5em] text-xs font-bold mb-4 block">
                         Təamlarımızın Dünyası
-                    </motion.span>
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        className="text-4xl md:text-6xl font-serif font-bold gold-gradient mb-8"
-                    >
+                    </span>
+                    <h2 className="text-4xl md:text-6xl font-serif font-bold gold-gradient mb-8">
                         Özəl Menyumuz
-                    </motion.h2>
+                    </h2>
                     <div className="w-24 h-1 bg-gradient-to-r from-transparent via-quzetti-gold to-transparent mx-auto" />
                 </div>
 
                 {/* Categories */}
                 <div className="flex flex-wrap justify-center gap-3 mb-16">
                     {categories.map((cat, idx) => (
-                        <motion.button
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: idx * 0.05 }}
+                        <button
                             key={cat}
                             onClick={() => {
                                 setActiveCategory(cat);
@@ -117,7 +106,7 @@ export default function Menu() {
                             )}
                         >
                             {cat}
-                        </motion.button>
+                        </button>
                     ))}
                 </div>
 
@@ -133,14 +122,7 @@ export default function Menu() {
                             return (
                                 <motion.div
                                     key={item.name}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true, margin: "-100px" }}
-                                    exit={{ opacity: 0, scale: 0.9 }}
-                                    transition={{
-                                        duration: 0.4,
-                                        delay: (idx % 3) * 0.05
-                                    }}
+                                    initial={{ opacity: 1, y: 0 }}
                                     className="glass rounded-[2rem] border border-quzetti-gold/10 hover:border-quzetti-gold/40 transition-all group overflow-hidden flex flex-col h-full shadow-xl"
                                 >
                                     {/* Image Section */}

@@ -142,9 +142,9 @@ export default function Home() {
         ) : showAboutDetail ? (
           <motion.div
             key="detailed-about"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="pt-40 pb-24 px-6 md:px-12 bg-quzetti-green min-h-screen"
           >
             <div className="max-w-5xl mx-auto">
@@ -216,9 +216,9 @@ export default function Home() {
         ) : (
           <motion.div
             key="detailed-contact"
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -100 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="pt-40 pb-32 px-6 md:px-12 bg-quzetti-green min-h-screen"
           >
             <div className="max-w-5xl mx-auto">
